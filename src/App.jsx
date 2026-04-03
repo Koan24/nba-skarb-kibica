@@ -1,26 +1,39 @@
+import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+
 import HeroSection from "./components/HeroSection"
 import TeamSection from "./components/TeamSection"
-import { teams } from "./data/teams"
-import {useEffect} from "react"
 import NavigationDots from "./components/NavigationDots"
+import IntroScreen from "./components/IntroScreen"
+
+import { teams } from "./data/teams"
 
 function App() {
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+    const [loading, setLoading] = useState(true)
 
     return (
-        <div className="scroll-container">
+        <>
+            {/* INTRO */}
+            <AnimatePresence>
+                {loading && <IntroScreen onFinish={() => setLoading(false)} />}
+            </AnimatePresence>
 
-            <NavigationDots sections={[{}, ...teams]} />
+            {/* GŁÓWNA APLIKACJA */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: loading ? 0 : 1 }}
+                transition={{ duration: 1 }}
+                className="scroll-container"
+            >
+                <NavigationDots sections={[{}, ...teams]} />
 
-            <HeroSection />
+                <HeroSection />
 
-            {teams.map((team, index) => (
-                <TeamSection key={index} team={team} />
-            ))}
-
-        </div>
+                {teams.map((team, index) => (
+                    <TeamSection key={index} team={team} />
+                ))}
+            </motion.div>
+        </>
     )
 }
 

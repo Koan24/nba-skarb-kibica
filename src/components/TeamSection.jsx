@@ -52,12 +52,12 @@ function TeamSection({ team }) {
 
                 {/* OBRAZ */}
                 <motion.img
-                    initial={{ scale: 1.15, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
+                    initial={{ scale: 1.2, y: -50 }}
+                    whileInView={{ scale: 1, y: 0 }}
+                    viewport={{ once: false }}
                     transition={{ duration: 1 }}
                     src={team.image}
-                    className="absolute w-full h-full object-cover grayscale"
+                    className="absolute w-full h-[120%] object-cover grayscale hover:scale-105 transition-all duration-700"
                 />
 
                 {/* OVERLAY gradient */}

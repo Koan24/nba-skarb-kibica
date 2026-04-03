@@ -4,11 +4,13 @@
 
 html {
     scroll-behavior: smooth;
+    background-color: black;
 }
 
 body {
     margin: 0;
     transition: background-color 0.6s ease;
+    background-color: black;
 }
 
 .scroll-container {
