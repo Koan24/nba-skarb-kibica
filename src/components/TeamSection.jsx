@@ -12,14 +12,10 @@ function TeamSection({ team }) {
                     document.body.style.backgroundColor = team.accent
                 }
             },
-            {
-                threshold: 0.6,
-            }
+            { threshold: 0.6 }
         )
 
-        if (ref.current) {
-            observer.observe(ref.current)
-        }
+        if (ref.current) observer.observe(ref.current)
 
         return () => {
             if (ref.current) observer.unobserve(ref.current)
@@ -29,7 +25,7 @@ function TeamSection({ team }) {
     return (
         <section
             ref={ref}
-            className="section h-screen w-full flex overflow-hidden"
+            className="section h-screen w-full flex overflow-hidden relative"
         >
 
             {/* LEWA */}
@@ -41,11 +37,11 @@ function TeamSection({ team }) {
                 className="w-1/2 flex items-center justify-center bg-white text-black px-16 z-10"
             >
                 <div>
-                    <h1 className="text-5xl font-bold mb-6 tracking-tight">
+                    <h1 className="text-6xl font-extrabold mb-6 tracking-tight leading-tight">
                         {team.name}
                     </h1>
 
-                    <p className="text-lg text-gray-700 max-w-md leading-relaxed">
+                    <p className="text-lg text-gray-600 max-w-md leading-relaxed">
                         {team.description}
                     </p>
                 </div>
@@ -64,9 +60,21 @@ function TeamSection({ team }) {
                     className="absolute w-full h-full object-cover grayscale"
                 />
 
-                {/* OVERLAY */}
+                {/* OVERLAY gradient */}
                 <div
-                    className="absolute inset-0 opacity-70"
+                    className="absolute inset-0 opacity-80"
+                    style={{
+                        background: `linear-gradient(
+              135deg,
+              ${team.accent} 0%,
+              black 100%
+            )`,
+                    }}
+                />
+
+                {/* GLOW (przeniesiony POD tekst) */}
+                <div
+                    className="absolute w-80 h-80 rounded-full blur-3xl opacity-30 z-0"
                     style={{ backgroundColor: team.accent }}
                 />
 
@@ -76,12 +84,16 @@ function TeamSection({ team }) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="relative text-white text-4xl font-bold tracking-widest"
+                    className="relative text-white text-5xl font-bold tracking-widest z-10"
                 >
                     {team.short}
                 </motion.h2>
 
+                {/* 🔥 DEPTH (NOWE — dół sekcji) */}
+                <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-black/50 to-transparent z-10" />
+
             </div>
+
         </section>
     )
 }

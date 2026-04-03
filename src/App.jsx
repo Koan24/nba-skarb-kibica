@@ -2,6 +2,7 @@ import HeroSection from "./components/HeroSection"
 import TeamSection from "./components/TeamSection"
 import { teams } from "./data/teams"
 import {useEffect} from "react"
+import NavigationDots from "./components/NavigationDots"
 
 function App() {
     useEffect(() => {
@@ -10,6 +11,8 @@ function App() {
 
     return (
         <div className="scroll-container">
+
+            <NavigationDots sections={[{}, ...teams]} />
 
             <HeroSection />
 
